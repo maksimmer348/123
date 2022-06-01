@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -14,44 +15,39 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using static System.Diagnostics.Debug;
 
-namespace TelerikWpfApp2
+namespace TelerikWpfApp2;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : RadRibbonWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : RadRibbonWindow
+    private bool swapTheme;
+
+    static MainWindow()
     {
-        private bool swapTheme;
+        IsWindowsThemeEnabled = false;
+    }
 
-        static MainWindow()
-        {
-            IsWindowsThemeEnabled = false;
-        }
-        public MainWindow()
-        {
-            StyleManager.ApplicationTheme = new Expression_DarkTheme();
-            InitializeComponent();
-        }
+    public MainWindow()
+    {
+        StyleManager.ApplicationTheme = new Expression_DarkTheme();
+        InitializeComponent();
+        Trace.Write("start");
+    }
 
-        private void cardView_Loaded(object sender, RoutedEventArgs e)
-        {
-            //var view = (QueryableCollectionView)cardView.ItemsSource;
-            //var groupToCollapse = view.Groups[0];
-            //cardView.Collapse(groupToCollapse);
-        }
+    private void RadNavigationView_OnItemClick(object sender, RoutedEventArgs e)
+    {
+        var clickedItem = e.OriginalSource as RadNavigationViewItem;
+        Trace.Write(clickedItem.Content);
+    }
 
-        protected void OnPropertyChanged(string porpName)
-        {
-            var temp = PropertyChanged;
-            if (temp != null)
-                temp(this, new PropertyChangedEventArgs(porpName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string FullName
-        {
-            get { return "Hello world"; }
-        }
+    private void OnNavigationViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        Trace.Write("Click");
     }
 }
+
+

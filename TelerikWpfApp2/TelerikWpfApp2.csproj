@@ -5,6 +5,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>TelerikWpfApp2</RootNamespace>
     <EnableDefaultItems>False</EnableDefaultItems>
+    <ApplicationIcon>Infrastructure\Resources\appIco.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,6 +53,9 @@
   
   <ItemGroup>
     <Content Include="Infrastructure\Resources\ampere.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Infrastructure\Resources\appIco.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Infrastructure\Resources\device.ico">

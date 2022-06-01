@@ -15,19 +15,34 @@ namespace TelerikWpfApp2;
 public class ViewModel : BaseVM
 {
     private ObservableCollection<string> iconsList;
-    private ObservableCollection<IconGlyph> glyphsList;
+    public ObservableCollection<IconGlyph> glyphsList;
+    public ObservableCollection<IconGlyph> GlyphsList
+    {
+        get => glyphsList;
+        set
+        {
+            Set(ref glyphsList, value);
+        }
+    }
+
     private string defaultMainTitle = "Стенд ЭТТ";
     public ViewModel()
     {
         iconsList = new();
         glyphsList = new();
-        StopStartMesaure = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
+        StopStartTest = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
+
+        Start();
+
         this.items = this.GetItems();
     }
+
+    #region UI preparation
+
     void Start()
     {
         //иконки
-        iconsList.Add(@"Infrastructure/Resources/device.ico");
+        iconsList.Add(@"Infrastructure/Resources/appIco.ico");
         iconsList.Add(@"Infrastructure/Resources/green.ico");
         iconsList.Add(@"Infrastructure/Resources/red.ico");
         //иконка по умолчанию
@@ -52,59 +67,70 @@ public class ViewModel : BaseVM
             Glyph = "&#xe11a;",
             Color = Color.FromRgb(0, 128, 1)
         });
+        glyphsList.Add(new IconGlyph()
+        {
+            Glyph = "&#xe13b;",
+        });
         mainTitle = defaultMainTitle;
         timeLeft = "00:00:00";
     }
 
 
     private List<NavigationViewItemModel> items;
+
+    //public ObservableCollection<NavigationViewItemModel> Items
+    //{
+    //    get => items;
+    //    set => Set(ref items, value);
+    //}
+
     public List<NavigationViewItemModel> Items
     {
         get
         {
-            return this.items;
+            return items;
         }
         set
         {
-            if (this.items != value)
+            if (value != null && items != value)
             {
-                this.items = value;
+                items = value;
             }
         }
     }
+
     private List<NavigationViewItemModel> GetItems()
     {
-        var inboxItem = new NavigationViewItemModel() { Icon = "&#xe802;", Title = "In box" };
-        inboxItem.SubItems = new ObservableCollection<NavigationViewItemModel>
+        var inboxItem = new NavigationViewItemModel()
         {
-            new NavigationViewItemModel() { Icon = "&#xe811;", Title = "LinkedIn" },
-            new NavigationViewItemModel() { Icon = "&#xe81f;", Title = "Twitter" },
-            new NavigationViewItemModel() { Icon = "&#xe815;", Title = "Pinterest" },
-            new NavigationViewItemModel() { Icon = "&#xe63d;", Title = "Subscriptions" },
-            new NavigationViewItemModel() { Icon = "&#xe400;", Title = "Orders Updates" }
+            Icon = glyphsList[3].Glyph,
+            IconBrush = Brushes.DarkGray,
+            Title = "ВИПЫ",
+            Status = StatusTest.None,
+            NavCommand = StopStartTest
         };
 
-        var importantItem = new NavigationViewItemModel() { Icon = "&#xe303;", Title = "Important" };
-        importantItem.SubItems = new ObservableCollection<NavigationViewItemModel>
+        inboxItem.SubItems = new ObservableCollection<NavigationViewItemModel>();
+        for (int i = 1; i <= 12; i++)
         {
-            new NavigationViewItemModel() { Title = "University" },
-            new NavigationViewItemModel() { Title = "Work" }
-        };
+            inboxItem.SubItems.Add(new NavigationViewItemModel()
+            {
+                Icon = glyphsList[0].Glyph,
+                IconBrush = Brushes.DarkGray,
+                Title = $"ВИП {i}",
+                Status = StatusTest.None
+            });
+        }
 
         return new List<NavigationViewItemModel>
         {
             inboxItem,
-            new NavigationViewItemModel() { Icon = "&#xe906;", Title = "Drafts"},
-            new NavigationViewItemModel() { Icon = "&#xe11a;", Title = "Sent"},
-            importantItem,
-            new NavigationViewItemModel() { Icon = "&#xe809;", Title = "All Mail"},
-            new NavigationViewItemModel() { Icon = "&#xe403;", Title = "Spam"},
-            new NavigationViewItemModel() { Icon = "&#xe10c;", Title = "Deleted"},
         };
     }
 
-    #region Properties
+    #endregion
 
+    #region Properties
 
     private string mainTitle;
     /// <summary>
@@ -141,24 +167,24 @@ public class ViewModel : BaseVM
     }
 
     //TODO иконки для випов
-    private IconGlyph vIPIco;
+    private IconGlyph itemIco;
     /// <summary>
     /// Иконка для ВИПА
     /// </summary>
-    public IconGlyph VIPIco
+    public IconGlyph ItemIco
     {
-        get => vIPIco;
-        set => Set(ref vIPIco, value);
+        get => itemIco;
+        set => Set(ref itemIco, value);
     }
 
-    private Color vIPGlyphColor;
+    private Color itemGlyphColor;
     /// <summary>
     /// Цвет иконка для ВИПА
     /// </summary>
-    public Color VIPGlyphColor
+    public Color ItemGlyphColor
     {
-        get => vIPGlyphColor;
-        set => Set(ref vIPGlyphColor, value);
+        get => itemGlyphColor;
+        set => Set(ref itemGlyphColor, value);
     }
 
     private StatusTest status;
@@ -199,7 +225,7 @@ public class ViewModel : BaseVM
     /// <summary>
     /// Свойство команды закрытия окна (те сама команда)
     /// </summary>
-    public ICommand StopStartMesaure { get; }
+    public ICommand StopStartTest{ get; }
 
 
     /// <summary>

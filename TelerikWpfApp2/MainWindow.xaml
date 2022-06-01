@@ -15,27 +15,50 @@
 
         <Grid.Resources>
 
-            <SolidColorBrush  x:Key="RadGlyph" Color="{Binding VIPGlyphColor}"/>
-            <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
-            <Style x:Key="clrPrimary" TargetType="telerik:RadGlyph">
-                <Setter Property="Foreground" Value="{Binding VIPGlyphColor}"></Setter>
-            </Style>
-
-            <Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">
-
-                <Setter Property="Content" Value="{Binding Title}" />
-                <Setter Property="ItemsSource" Value="{Binding SubItems}"/>
-
-                <Setter Property="Icon" Value="{Binding VIPIco}" />
+            <!--<SolidColorBrush  x:Key="ItemGlyphColor" Color="{Binding ItemGlyphColor}"/>-->
+            <!--<telerik:StringToGlyphConverter x:Key="StringToGlyphConverter"/>-->
+            <!--<Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">
+                <Setter Property="Icon" Value="{Binding ItemIco}" />
                 <Setter Property="IconTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}" Foreground="{StaticResource RadGlyph}"/>
+                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}" Foreground="{StaticResource ItemGlyphColor}"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+
+            <Style x:Key="StopButton" TargetType="Button">
+                <Setter Property="Content" Value="StopTests" />
+                <!--<Setter Property="CloseCommand" Value="{Binding DataContext.StopStartTest, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />-->
+            </Style>
+
+            <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter"/>
+            <Style x:Key="ItemBaseStyle" TargetType="telerik:RadNavigationViewItem">
+                <Setter Property="Content" Value="{Binding Title}" />
+                <Setter Property="ItemsSource" Value="{Binding SubItems}"/>
+                
+                <Setter Property="Icon" Value="{Binding Icon}"/>
+                <Setter Property="BorderBrush" Value="{Binding IconBrush}"/>
+
+                <Setter Property = "BorderThickness" Value = "0"/>
+                <Setter Property="IconTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}" Foreground="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadNavigationViewItem }}}"/>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style x:Key="ItemStyle" TargetType="telerik:RadNavigationViewItem" BasedOn="{StaticResource ItemBaseStyle}">
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ItemBaseStyle}"/>
+            </Style>
+
+
         </Grid.Resources>
+
+
 
         <telerik:RadNavigationView
             CompactModeThresholdWidth="280" 
@@ -43,15 +66,19 @@
             PaneHeader="{Binding Place}"
             ItemsSource="{Binding Items}"
             ItemContainerStyle="{StaticResource ItemStyle}"
+            SubItemsIndentation ="10"
+            ItemClick="RadNavigationView_OnItemClick"
+            SelectionChanged="OnNavigationViewSelectionChanged"
+        >
 
-            >
+            <Button Command="{Binding StopStartTest}" HorizontalAlignment="Left" VerticalAlignment="Top"  />
             <!--<telerik:RadNavigationView.Items>-->
 
             <!--<telerik:RadNavigationViewItem IsExpanded="True" Command="{Binding StopStartMesaure}" Content="ВИПы" Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}">
-                    --><!--<telerik:RadNavigationViewItem.Icon>
+                    <telerik:RadNavigationViewItem.Icon>
                         <telerik:RadGlyph Glyph="&#xe600;" FontSize="20" />
-                    </telerik:RadNavigationViewItem.Icon>-->
-                    <!--<telerik:RadNavigationViewItem.Items>
+                    </telerik:RadNavigationViewItem.Icon>
+                    <telerik:RadNavigationViewItem.Items>
 
                         <telerik:RadNavigationViewItem Content="Вип 1">
                             <telerik:RadNavigationViewItem.Icon>
@@ -61,7 +88,7 @@
 
                         <telerik:RadNavigationViewItem Content="Вип 2">
                             <telerik:RadNavigationViewItem.Icon>
-                                <telerik:RadGlyph Glyph="&#xe11a;" Foreground="Green" FontSize="20" />
+                                <telerik:RadGlyph Glyph="{Binding GlyphsList[0].Glyph, Converter={StaticResource StringToGlyphConverter}}" Foreground="{Binding GlyphsList[0].Color}" FontSize="20" />
                             </telerik:RadNavigationViewItem.Icon>
                         </telerik:RadNavigationViewItem>
                         <telerik:RadNavigationViewItem Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}"/>
@@ -75,12 +102,9 @@
                         <telerik:RadNavigationViewItem Content="Вип 11"/>
                         <telerik:RadNavigationViewItem Content="Вип 12"/>
                     </telerik:RadNavigationViewItem.Items>
-                </telerik:RadNavigationViewItem>-->
-                
-                
-                
-                
-            <!--</telerik:RadNavigationView.Items>-->
+                </telerik:RadNavigationViewItem>
+
+          </telerik:RadNavigationView.Items>-->
 
 
 
