@@ -1,0 +1,66 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+1" Command="{Binding CtrlCommand}" CommandParameter="Viewer1"/>
+        <KeyBinding Gesture="Ctrl+2" Command="{Binding CtrlCommand}" CommandParameter="Viewer2"/>
+        <KeyBinding Gesture="Ctrl+3" Command="{Binding CtrlCommand}" CommandParameter="Viewer3"/>
+
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/System.Windows.xaml" />
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/Telerik.Windows.Controls.xaml" />
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/Telerik.Windows.Controls.Data.xaml" />
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/Telerik.Windows.Controls.GridView.xaml" />
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/Telerik.Windows.Controls.Input.xaml" />
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Office2013;component/Themes/Telerik.Windows.Controls.Navigation.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+            <!-- <telerik:NullToVisibilityConverter x:Key="NullToVisibilityConverter" /> -->
+            <Style x:Key="NavigationSubItemStyle" TargetType="telerik:RadNavigationViewItem" BasedOn="{StaticResource RadNavigationViewItemStyle}">
+                <Setter Property="FontSize"       Value="14" />
+                <Setter Property="Margin"         Value="0,3"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+
+        <telerik:RadNavigationView Grid.Row="1"
+                                   CanKeyboardNavigationSelectItems ="True"
+                                   CompactPaneWidth="60" 
+                                   AutoChangeDisplayMode="False"
+                                   DisplayMode="Expanded"
+                                   DisplayMemberPath="Title"
+                                   PaneHeader    ="Menu"
+                                   ItemsSource   ="{Binding Menu}"
+                                   SelectedItem  ="{Binding MenuItem,  Mode=TwoWay}">
+            <telerik:RadNavigationView.ItemContainerStyle>
+                <Style TargetType="telerik:RadNavigationViewItem" BasedOn="{StaticResource RadNavigationViewItemStyle}">
+                    <Setter Property="DisplayMemberPath" Value="Title" />
+                    <Setter Property="FontSize"        Value="17" />
+                    <Setter Property="Margin"          Value="0,3"/>
+                    <Setter Property="BorderBrush"     Value="LightGray"/>
+                    <Setter Property="BorderThickness" Value="0,1"/>
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                    <Setter Property="ItemsSource" Value="{Binding SubItems}" />
+                    <Setter Property="ItemContainerStyle" Value="{StaticResource NavigationSubItemStyle}" />
+                </Style>
+            </telerik:RadNavigationView.ItemContainerStyle>
+
+            <telerik:RadNavigationView.Content>
+                <ContentControl Content="{Binding ViewContent, Mode=TwoWay}"/>
+            </telerik:RadNavigationView.Content>
+        </telerik:RadNavigationView>
+
+    </Grid>
+</Window>

@@ -5,8 +5,8 @@
                          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                          Height="542" Width="1000"
                          IsTitleVisible ="True"
-                         Title="{Binding MainTitle}"
-                         Icon="{Binding MainIco}"
+                         Title="{Binding MainTitle, UpdateSourceTrigger=PropertyChanged}"
+                         Icon="{Binding MainIco, UpdateSourceTrigger=PropertyChanged}"
                          ResizeMode="CanMinimize">
     <telerik:RadRibbonWindow.DataContext>
         <local:ViewModel/>
@@ -40,12 +40,13 @@
                 
                 <Setter Property="Icon" Value="{Binding Icon}"/>
                 <Setter Property="BorderBrush" Value="{Binding IconBrush}"/>
-
                 <Setter Property = "BorderThickness" Value = "0"/>
                 <Setter Property="IconTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}" Foreground="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type telerik:RadNavigationViewItem }}}"/>
+                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}"
+                                              Foreground="{Binding BorderBrush, 
+                                              RelativeSource={RelativeSource AncestorType={x:Type telerik:RadNavigationViewItem }}}"/>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
@@ -67,11 +68,15 @@
             ItemsSource="{Binding Items}"
             ItemContainerStyle="{StaticResource ItemStyle}"
             SubItemsIndentation ="10"
-            ItemClick="RadNavigationView_OnItemClick"
-            SelectionChanged="OnNavigationViewSelectionChanged"
+            SelectedItem  ="{Binding MenuItem,  Mode=TwoWay}"
         >
+            <!-- <telerik:EventToCommandBehavior.EventBindings> -->
+            <!--     <telerik:EventBinding Command="{Binding StopStartTest}" EventName="MouseLeftButtonDown"  -->
+            <!--                           RaiseOnHandledEvents="True"     -->
+            <!--                           PassEventArgsToCommand="True" /> -->
+            <!-- </telerik:EventToCommandBehavior.EventBindings> -->
 
-            <Button Command="{Binding StopStartTest}" HorizontalAlignment="Left" VerticalAlignment="Top"  />
+            <Button Height="100" Width="100" Command="{Binding StopStartTest}" HorizontalAlignment="Left" VerticalAlignment="Top"  />
             <!--<telerik:RadNavigationView.Items>-->
 
             <!--<telerik:RadNavigationViewItem IsExpanded="True" Command="{Binding StopStartMesaure}" Content="ВИПы" Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}">
