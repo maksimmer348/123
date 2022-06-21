@@ -1,8 +1,9 @@
-﻿namespace TelerikWpfApp2;
-
-public enum StatusTest
+﻿namespace TelerikWpfApp2
 {
-    None,
-    Error,
-    Ok
+    public enum StatusTest
+    {
+        None,
+        Error,
+        Ok
+    }
 }

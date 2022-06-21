@@ -75,8 +75,27 @@
             <!--                           RaiseOnHandledEvents="True"     -->
             <!--                           PassEventArgsToCommand="True" /> -->
             <!-- </telerik:EventToCommandBehavior.EventBindings> -->
+            <!--<WrapPanel>
+                <Button Content="1" Command="{Binding StopStartTest}"  />
+                <Button Command="{Binding StopStartTest}"  />
+                <Button  Command="{Binding StopStartTest}"  />
+                <Button  Command="{Binding StopStartTest}"   />
+                 <Button  Command="{Binding StopStartTest}"  />
+            </WrapPanel>-->
 
-            <Button Height="100" Width="100" Command="{Binding StopStartTest}" HorizontalAlignment="Left" VerticalAlignment="Top"  />
+            <ListView ItemsSource="{Binding CurrentSelection}">
+               <ItemsControl.ItemsPanel>
+                   <ItemsPanelTemplate>
+                       <UniformGrid Columns="3"/>
+                   </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+               <ItemsControl.ItemTemplate>
+                   <DataTemplate>
+                       <!-- тут код для отображения вашего продукта -->
+                   </DataTemplate>
+               </ItemsControl.ItemTemplate>
+            </ListView>
+            
             <!--<telerik:RadNavigationView.Items>-->
 
             <!--<telerik:RadNavigationViewItem IsExpanded="True" Command="{Binding StopStartMesaure}" Content="ВИПы" Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}">

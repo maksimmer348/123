@@ -1,9 +1,11 @@
 ﻿using System.Windows.Media;
 
-namespace TelerikWpfApp2;
-
-public class IconGlyph
+namespace TelerikWpfApp2
 {
-    public string Glyph { get; set; }
-    public Color Color { get; set; }
+    public struct IconGlyph
+    {
+        public string Glyph { get; set; }
+        public Brush Color { get; set; }
+    }
 }
+
