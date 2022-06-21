@@ -35,25 +35,8 @@ namespace TelerikWpfApp2
         {
             StyleManager.ApplicationTheme = new Expression_DarkTheme();
             InitializeComponent();
-            DataContext = new ViewModel();
-            Trace.Write("start");
         }
 
-        private void RadNavigationView_OnItemClick(object sender, RoutedEventArgs e)
-        {
-            var clickedItem = e.OriginalSource as RadNavigationViewItem;
-            Trace.Write($"{clickedItem?.Content}");
-            (DataContext as ViewModel).SS();
-        }
-
-        private void OnNavigationViewSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                var currentlySelectedItem = e.AddedItems[0] as NavigationViewItemModel;
-                Trace.Write($"{currentlySelectedItem.Title}");
-            }
-        }
     }
 
 

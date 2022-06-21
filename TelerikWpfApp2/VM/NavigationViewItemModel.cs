@@ -6,6 +6,9 @@ namespace TelerikWpfApp2
 {
     public class NavigationViewItemModel : BaseVM // можно ли разбить  вью модель на несолько классов вот так
     {
+
+
+
         public IconGlyph IconNone;
         public IconGlyph IconError;
         public IconGlyph IconOk;
@@ -43,7 +46,7 @@ namespace TelerikWpfApp2
                 }
             }
         }
-        public string icon;// можно ли хранить иконки в строке
+        public string icon;
         public string Icon
         {
             get => icon;

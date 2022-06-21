@@ -14,30 +14,19 @@
     <Grid>
 
         <Grid.Resources>
-
-            <!--<SolidColorBrush  x:Key="ItemGlyphColor" Color="{Binding ItemGlyphColor}"/>-->
-            <!--<telerik:StringToGlyphConverter x:Key="StringToGlyphConverter"/>-->
-            <!--<Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">
-                <Setter Property="Icon" Value="{Binding ItemIco}" />
-                <Setter Property="IconTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}" Foreground="{StaticResource ItemGlyphColor}"/>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
-
             <Style x:Key="StopButton" TargetType="Button">
                 <Setter Property="Content" Value="StopTests" />
                 <!--<Setter Property="CloseCommand" Value="{Binding DataContext.StopStartTest, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />-->
             </Style>
 
             <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter"/>
+
             <Style x:Key="ItemBaseStyle" TargetType="telerik:RadNavigationViewItem">
+                <Setter Property="Command" Value="{Binding NavCommand}"/>
+                <Setter Property="CommandParameter" Value="{Binding}"/>
+
                 <Setter Property="Content" Value="{Binding Title}" />
                 <Setter Property="ItemsSource" Value="{Binding SubItems}"/>
-                
                 <Setter Property="Icon" Value="{Binding Icon}"/>
                 <Setter Property="BorderBrush" Value="{Binding IconBrush}"/>
                 <Setter Property = "BorderThickness" Value = "0"/>
@@ -70,84 +59,19 @@
             SubItemsIndentation ="10"
             SelectedItem  ="{Binding MenuItem,  Mode=TwoWay}"
         >
-            <!-- <telerik:EventToCommandBehavior.EventBindings> -->
-            <!--     <telerik:EventBinding Command="{Binding StopStartTest}" EventName="MouseLeftButtonDown"  -->
-            <!--                           RaiseOnHandledEvents="True"     -->
-            <!--                           PassEventArgsToCommand="True" /> -->
-            <!-- </telerik:EventToCommandBehavior.EventBindings> -->
-            <!--<WrapPanel>
-                <Button Content="1" Command="{Binding StopStartTest}"  />
-                <Button Command="{Binding StopStartTest}"  />
-                <Button  Command="{Binding StopStartTest}"  />
-                <Button  Command="{Binding StopStartTest}"   />
-                 <Button  Command="{Binding StopStartTest}"  />
-            </WrapPanel>-->
-
             <ListView ItemsSource="{Binding CurrentSelection}">
-               <ItemsControl.ItemsPanel>
-                   <ItemsPanelTemplate>
-                       <UniformGrid Columns="3"/>
-                   </ItemsPanelTemplate>
-               </ItemsControl.ItemsPanel>
-               <ItemsControl.ItemTemplate>
-                   <DataTemplate>
-                       <!-- тут код для отображения вашего продукта -->
-                   </DataTemplate>
-               </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!---->
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ListView>
-            
-            <!--<telerik:RadNavigationView.Items>-->
 
-            <!--<telerik:RadNavigationViewItem IsExpanded="True" Command="{Binding StopStartMesaure}" Content="ВИПы" Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}">
-                    <telerik:RadNavigationViewItem.Icon>
-                        <telerik:RadGlyph Glyph="&#xe600;" FontSize="20" />
-                    </telerik:RadNavigationViewItem.Icon>
-                    <telerik:RadNavigationViewItem.Items>
-
-                        <telerik:RadNavigationViewItem Content="Вип 1">
-                            <telerik:RadNavigationViewItem.Icon>
-                                <telerik:RadGlyph Glyph="&#xe11d;" Foreground="Red" FontSize="20" />
-                            </telerik:RadNavigationViewItem.Icon>
-                        </telerik:RadNavigationViewItem>
-
-                        <telerik:RadNavigationViewItem Content="Вип 2">
-                            <telerik:RadNavigationViewItem.Icon>
-                                <telerik:RadGlyph Glyph="{Binding GlyphsList[0].Glyph, Converter={StaticResource StringToGlyphConverter}}" Foreground="{Binding GlyphsList[0].Color}" FontSize="20" />
-                            </telerik:RadNavigationViewItem.Icon>
-                        </telerik:RadNavigationViewItem>
-                        <telerik:RadNavigationViewItem Style="{StaticResource ResourceKey=BaseNavigationViewItemStyle}"/>
-                        <telerik:RadNavigationViewItem Content="Вип 4"/>
-                        <telerik:RadNavigationViewItem Content="Вип 5"/>
-                        <telerik:RadNavigationViewItem Content="Вип 6"/>
-                        <telerik:RadNavigationViewItem Content="Вип 7"/>
-                        <telerik:RadNavigationViewItem Content="Вип 8"/>
-                        <telerik:RadNavigationViewItem Content="Вип 9"/>
-                        <telerik:RadNavigationViewItem Content="Вип 10"/>
-                        <telerik:RadNavigationViewItem Content="Вип 11"/>
-                        <telerik:RadNavigationViewItem Content="Вип 12"/>
-                    </telerik:RadNavigationViewItem.Items>
-                </telerik:RadNavigationViewItem>
-
-          </telerik:RadNavigationView.Items>-->
-
-
-
-            <!--<telerik:RadCardView x:Name="cardView"
-                                 AutoGenerateDataFieldDescriptors="False"
-                                 CardHeaderBinding="{Binding ContactName}"
-                                 ItemsSource="{Binding View, Source={StaticResource qcvs}}"
-                                 Loaded="cardView_Loaded">
-                <telerik:RadCardView.DataFieldDescriptors>
-                    <telerik:CardDataFieldDescriptor Header="ID" DataMemberBinding="{Binding CustomerID}" IsReadOnly="True" />
-                    <telerik:CardDataFieldDescriptor Header="Company" DataMemberBinding="{Binding CompanyName}"/>
-                    <telerik:CardDataFieldDescriptor Header="Name" DataMemberBinding="{Binding ContactName}" />
-                    <telerik:CardDataFieldDescriptor Header="Title" DataMemberBinding="{Binding ContactTitle}" />
-                    <telerik:CardDataFieldDescriptor Header="Country" DataMemberBinding="{Binding Country}"/>
-                    <telerik:CardDataFieldDescriptor Header="City" DataMemberBinding="{Binding City}"/>
-                    <telerik:CardDataFieldDescriptor Header="Address" DataMemberBinding="{Binding Address}"/>
-                    <telerik:CardDataFieldDescriptor Header="Phone" DataMemberBinding="{Binding Phone}"/>
-                </telerik:RadCardView.DataFieldDescriptors>
-            </telerik:RadCardView>-->
         </telerik:RadNavigationView>
     </Grid>
 </telerik:RadRibbonWindow>

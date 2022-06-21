@@ -18,65 +18,33 @@ namespace TelerikWpfApp2
     public class ViewModel : BaseVM
     {
         private ObservableCollection<string> iconsList;
-        public ObservableCollection<IconGlyph> glyphsList;
-
-        public ObservableCollection<IconGlyph> GlyphsList
-        {
-            get => glyphsList;
-            set { Set(ref glyphsList, value); }
-        }
-
         private string defaultMainTitle = "Стенд ЭТТ";
 
         public ViewModel()
         {
-            iconsList = new();
-            glyphsList = new();
-            StopStartTest = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
-
+            StopStartTestCommand = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
+            SelectVipCommand = new ActionCommand(OnSelectVipCmdExecuted, CanSelectVipCmdExecuted);
             Start();
 
-            items = GetItems();
+           
         }
 
+     
         #region UI preparation
 
         void Start()
         {
             //добавление икнок для Title
+            iconsList = new();
             iconsList.Add(@"Infrastructure/Resources/appIco.ico");
             iconsList.Add(@"Infrastructure/Resources/red.ico");
             iconsList.Add(@"Infrastructure/Resources/green.ico");
-            //установка иконка по умолчанию для Title
+            //установка стартовой иконки, и заглоловка окна
             mainIco = iconsList[0];
-
-            //глифы
-            //отключен для субмодулей
-            glyphsList.Add(new IconGlyph()
-            {
-                Glyph = "&#xe115",
-                Color = Brushes.DarkGray
-            });
-            //ошибка
-            glyphsList.Add(new IconGlyph()
-            {
-                Glyph = "&#xe11d;",
-                Color = Brushes.Red
-            });
-            //ок
-            glyphsList.Add(new IconGlyph()
-            {
-                Glyph = "&#xe11a;",
-                Color = Brushes.Green
-            });
-            //отключен для общего модуля
-            glyphsList.Add(new IconGlyph()
-            {
-                Glyph = "&#xe13b;",
-                Color = Brushes.DarkGray
-            });
             mainTitle = defaultMainTitle;
             timeLeft = "00:00:00";
+            //заполнение боковго меню итемами
+            items = GetItems();
         }
 
         private NavigationViewItemModel menuItem;
@@ -126,7 +94,7 @@ namespace TelerikWpfApp2
                 IconOk = iconOk,
                 Title = "ВИПЫ",
                 Status = StatusTest.None,
-                NavCommand = StopStartTest
+                NavCommand = StopStartTestCommand
             };
 
             inboxItem.SubItems = new ObservableCollection<NavigationViewItemModel>();
@@ -138,10 +106,12 @@ namespace TelerikWpfApp2
                     IconError = iconError,
                     IconOk = iconOk,
                     Title = $"ВИП {i}",
-                    Status = StatusTest.None
+                    Status = StatusTest.None,
+                    NavCommand = SelectVipCommand
                 });
             }
 
+            
             return new ObservableCollection<NavigationViewItemModel>
             {
             inboxItem,
@@ -241,36 +211,27 @@ namespace TelerikWpfApp2
                 }
             }
         }
-
+        //TODO меняется при нажатии/зоде испытаний
         private string place;
         public string Place => place = "Меню/ВИП#";
 
         #endregion
 
         #region Commands
-
+        
         /// <summary>
-        /// Команда остановить запустиьт исптания (тест)
+        /// Команда остановить запустиьт исптания (для тестов)
         /// </summary>
-        public ICommand StopStartTest { get; }
+        public ICommand StopStartTestCommand { get; }
 
-        public void SS()
-        {
-            MessageBox.Show("Clicked Item");
-        }
+
 
         /// <summary>
-        /// Выполнение логики команды
+        /// Команда смены режима ипытаний (для тестов)
         /// </summary>
         /// <param name="p"></param>
         void OnCloseAppCmdExecuted(object p)
         {
-            // var clickedItem = (p as MouseButtonEventArgs).OriginalSource as TextBlock;
-            // if (clickedItem != null)
-            // {
-            //     MessageBox.Show("Clicked Item: " + clickedItem.Text);
-            // }
-
             if (mainStatus == StatusTest.None)
             {
                 MainStatus = StatusTest.Error;
@@ -288,15 +249,32 @@ namespace TelerikWpfApp2
         }
 
         /// <summary>
-        /// Доступность команды для выполнения
+        /// Доступонсть команды для смкены режима исп (для тестов)
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
         bool CanCloseAppCmdExecuted(object p)
         {
+
             //команда доступна для выполнения всегда, поэтому возварщаем труе 
             return true;
         }
+
+        /// <summary>
+        /// Команда 
+        /// </summary>
+        public ICommand SelectVipCommand;
+        private void OnSelectVipCmdExecuted(object obj)
+        {
+            var s = ((NavigationViewItemModel)obj).Status;
+            MessageBox.Show(s.ToString());
+        }
+
+        private bool CanSelectVipCmdExecuted(object arg)
+        {
+            return true;
+        }
+
 
         #endregion
     }
