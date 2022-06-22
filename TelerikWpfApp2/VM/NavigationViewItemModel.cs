@@ -7,7 +7,7 @@ namespace TelerikWpfApp2
     public class NavigationViewItemModel : BaseVM // можно ли разбить  вью модель на несолько классов вот так
     {
 
-
+        public TemplateType TypeButton;
 
         public IconGlyph IconNone;
         public IconGlyph IconError;

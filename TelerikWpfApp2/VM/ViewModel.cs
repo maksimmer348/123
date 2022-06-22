@@ -89,6 +89,7 @@ namespace TelerikWpfApp2
 
             var inboxItem = new NavigationViewItemModel()
             {
+                TypeButton = TemplateType.AllVips,
                 IconNone = iconNone,
                 IconError = iconError,
                 IconOk = iconOk,
@@ -102,6 +103,7 @@ namespace TelerikWpfApp2
             {
                 inboxItem.SubItems.Add(new NavigationViewItemModel()
                 {
+                    TypeButton = TemplateType.Vip,
                     IconNone = iconNoneSub,
                     IconError = iconError,
                     IconOk = iconOk,
@@ -194,6 +196,7 @@ namespace TelerikWpfApp2
                     MainTitle = defaultMainTitle;
                     MainIco = iconsList[0];
                     Items[0].Status = StatusTest.None;
+                    Items[0].SubItems[0].Status = StatusTest.None;
                 }
 
                 if (mainStatus == StatusTest.Error)
@@ -201,6 +204,7 @@ namespace TelerikWpfApp2
                     MainTitle = "Ошибка";
                     MainIco = iconsList[1];
                     Items[0].Status = StatusTest.Error;
+                    Items[0].SubItems[0].Status = StatusTest.Error;
                 }
 
                 if (mainStatus == StatusTest.Ok)
@@ -208,6 +212,7 @@ namespace TelerikWpfApp2
                     MainTitle = $"Идут испытания, до конца: {timeLeft}";
                     MainIco = iconsList[2];
                     Items[0].Status = StatusTest.Ok;
+                    Items[0].SubItems[0].Status = StatusTest.Ok;
                 }
             }
         }
@@ -267,7 +272,7 @@ namespace TelerikWpfApp2
         private void OnSelectVipCmdExecuted(object obj)
         {
             var s = ((NavigationViewItemModel)obj).Status;
-            MessageBox.Show(s.ToString());
+            //MessageBox.Show(s.ToString());
         }
 
         private bool CanSelectVipCmdExecuted(object arg)

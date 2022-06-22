@@ -3,7 +3,7 @@
     public class BaseVIP
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public string Type { get; set; } = "VIP 71";
         public int Number { get; set; }
         public double Temperature { get; set; }
         public double VoltageInput { get; set; }

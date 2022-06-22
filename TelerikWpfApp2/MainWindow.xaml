@@ -3,7 +3,7 @@
                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                          xmlns:local="clr-namespace:TelerikWpfApp2"
                          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-                         Height="542" Width="1000"
+                         Height="582" Width="1000"
                          IsTitleVisible ="True"
                          Title="{Binding MainTitle, UpdateSourceTrigger=PropertyChanged}"
                          Icon="{Binding MainIco, UpdateSourceTrigger=PropertyChanged}"
@@ -11,9 +11,11 @@
     <telerik:RadRibbonWindow.DataContext>
         <local:ViewModel/>
     </telerik:RadRibbonWindow.DataContext>
+
     <Grid>
 
         <Grid.Resources>
+
             <Style x:Key="StopButton" TargetType="Button">
                 <Setter Property="Content" Value="StopTests" />
                 <!--<Setter Property="CloseCommand" Value="{Binding DataContext.StopStartTest, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />-->
@@ -44,13 +46,10 @@
             <Style x:Key="ItemStyle" TargetType="telerik:RadNavigationViewItem" BasedOn="{StaticResource ItemBaseStyle}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ItemBaseStyle}"/>
             </Style>
-
-
         </Grid.Resources>
 
-
-
         <telerik:RadNavigationView
+            x:Name="NavigationView"
             CompactModeThresholdWidth="280" 
             ExpandedModeThresholdWidth="450"
             PaneHeader="{Binding Place}"
@@ -59,19 +58,28 @@
             SubItemsIndentation ="10"
             SelectedItem  ="{Binding MenuItem,  Mode=TwoWay}"
         >
-            <ListView ItemsSource="{Binding CurrentSelection}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <!---->
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListView>
+            <telerik:RadNavigationView.PaneFooter>
+                <telerik:RadNavigationViewItem Content="Настройки" 
+                                               Command="{Binding StopStartTestCommand}"
+                                               CommandParameter="{Binding ElementName=NavigationView}"
+                                               IconTemplate="{x:Null}">
+                    <telerik:RadNavigationViewItem.Icon>
+                        <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
+                    </telerik:RadNavigationViewItem.Icon>
+                </telerik:RadNavigationViewItem>
+            </telerik:RadNavigationView.PaneFooter>
+            <!--/////////-->
 
+
+            <telerik:RadNavigationView.Content>
+                <telerik:RadTransitionControl Content="{Binding SelectedItem, ElementName=NavigationView}"
+                                              ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
+                                              Duration="0:0:0.4">
+                    <telerik:RadTransitionControl.Transition>
+                        <telerik:FadeTransition />
+                    </telerik:RadTransitionControl.Transition>
+                </telerik:RadTransitionControl>
+            </telerik:RadNavigationView.Content>
         </telerik:RadNavigationView>
     </Grid>
 </telerik:RadRibbonWindow>

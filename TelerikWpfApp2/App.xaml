@@ -5,10 +5,10 @@
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <telerik:FluentResourceDictionary/>
-                </ResourceDictionary.MergedDictionaries>
-            <!--<ResourceDictionary.Source>Infrastructure/Styles/NavigationView.xaml</ResourceDictionary.Source>-->
+            <ResourceDictionary.MergedDictionaries>
+                <telerik:FluentResourceDictionary/>
+                <ResourceDictionary Source="Infrastructure/Styles/NavigationView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
