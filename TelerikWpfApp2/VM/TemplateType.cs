@@ -2,6 +2,7 @@
 {
     public enum TemplateType
     {
+        Wizard,
         AllVips,
         Vip,
         Settings

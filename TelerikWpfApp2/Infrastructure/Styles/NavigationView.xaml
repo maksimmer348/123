@@ -3,7 +3,6 @@
                     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                     xmlns:local="clr-namespace:TelerikWpfApp2">
 
-
     <DataTemplate x:Key="ContentTemplateEmpty">
         <ScrollViewer>
             <Grid Margin="20 20 0 0">
@@ -12,12 +11,12 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="content EMPTY" FontSize="16" Foreground="#f00" FontWeight="Medium"/>
+                <TextBlock Text="WIZARD" FontSize="16" Foreground="#f00" FontWeight="Medium"/>
             </Grid>
         </ScrollViewer>
     </DataTemplate>
 
-    <DataTemplate x:Key="ContentTemplate1">
+    <DataTemplate x:Key="ContentWizard">
         <ScrollViewer>
             <Grid Margin="20 20 0 0">
                 <Grid.RowDefinitions>
@@ -25,13 +24,25 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <TextBlock Text="content EMPTY" FontSize="16" Foreground="Gray" FontWeight="Medium"/>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
+    <DataTemplate x:Key="ContentTemplateAllVips">
+        <ScrollViewer>
+            <Grid Margin="20 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
                 <TextBlock Text="{Binding Title}" FontSize="16" Foreground="#0099BC" FontWeight="Medium"/>
+
             </Grid>
         </ScrollViewer>
     </DataTemplate>
 
-    <DataTemplate x:Key="ContentTemplate2">
+    <DataTemplate x:Key="ContentTemplateVip">
         <ScrollViewer>
             <Grid Margin="20 20 0 0">
                 <Grid.RowDefinitions>
@@ -44,10 +55,10 @@
         </ScrollViewer>
     </DataTemplate>
 
-
     <local:NavigationContentTemplateSelector x:Key="NavigationContentTemplateSelector" 
                                              TemplateEmpty="{StaticResource ContentTemplateEmpty}"
-                                             Template1="{StaticResource ContentTemplate1}" 
-                                             Template2="{StaticResource ContentTemplate2}"/>
+                                             TemplateWizard="{StaticResource ContentTemplateEmpty}"
+                                             TemplateAllVips="{StaticResource ContentTemplateAllVips}" 
+                                             TemplateVip="{StaticResource ContentTemplateVip}"/>
 
 </ResourceDictionary>
