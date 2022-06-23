@@ -1,11 +1,28 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
+using TelerikWpfApp2.Model.TestedVIPs;
 
 namespace TelerikWpfApp2
 {
     public class NavigationViewItemModel : BaseVM // можно ли разбить  вью модель на несолько классов вот так
     {
+        public BaseVIP VIP { get; set; }
+
+        private int numVip;
+
+        /// <summary>
+        /// Иконка окна
+        /// </summary>
+        public int NumVip
+        {
+            get => VIP.Number;
+            set
+            {
+                VIP.Number = value;
+                OnPropertyChanged("NumVip");
+            }
+        }
 
         public TemplateType TypeButton;
 

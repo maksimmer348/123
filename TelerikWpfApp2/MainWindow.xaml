@@ -60,7 +60,7 @@
         >
             <telerik:RadNavigationView.PaneFooter>
                 <telerik:RadNavigationViewItem Content="Настройки" 
-                                               Command="{Binding StopStartTestCommand}"
+                                               Command="{Binding SettingsCommand}"
                                                CommandParameter="{Binding ElementName=NavigationView}"
                                                IconTemplate="{x:Null}">
                     <telerik:RadNavigationViewItem.Icon>
@@ -69,7 +69,6 @@
                 </telerik:RadNavigationViewItem>
             </telerik:RadNavigationView.PaneFooter>
             <!--/////////-->
-
 
             <telerik:RadNavigationView.Content>
                 <telerik:RadTransitionControl Content="{Binding SelectedItem, ElementName=NavigationView}"

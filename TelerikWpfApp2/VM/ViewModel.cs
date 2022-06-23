@@ -17,20 +17,33 @@ namespace TelerikWpfApp2
 
     public class ViewModel : BaseVM
     {
-        private ObservableCollection<string> iconsList;
-        private string defaultMainTitle = "Стенд ЭТТ";
+        private ObservableCollection<BaseVIP> VIPs = new()
+        {
+            new VIP71(){Number = 1, Temperature = 20},
+            new VIP71(){ Number = 2, Temperature = 30 },
+            new VIP71() { Number = 3, Temperature = 40 }
+        };
 
         public ViewModel()
         {
+            #region Commands
+
             StopStartTestCommand = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
             SelectVipCommand = new ActionCommand(OnSelectVipCmdExecuted, CanSelectVipCmdExecuted);
+            SettingsCommand = new ActionCommand(OnSettingCmdExecuted, CanSettingCmdExecuted);
+
+            #endregion
+
             Start();
 
-           
+      
         }
 
-     
+
         #region UI preparation
+
+        private ObservableCollection<string> iconsList;
+        private string defaultMainTitle = "Стенд ЭТТ";
 
         void Start()
         {
@@ -65,6 +78,10 @@ namespace TelerikWpfApp2
 
         private ObservableCollection<NavigationViewItemModel> GetItems()
         {
+            int numVip = 0;
+            int tempVip = 10;
+            int VInputVip = 14;
+
 
             IconGlyph iconNone = new IconGlyph()
             {
@@ -73,7 +90,7 @@ namespace TelerikWpfApp2
             };
             IconGlyph iconNoneSub = new IconGlyph()
             {
-                Glyph ="&#xe115", 
+                Glyph = "&#xe115",
                 Color = Brushes.DarkGray
             };
             IconGlyph iconError = new IconGlyph()
@@ -103,6 +120,7 @@ namespace TelerikWpfApp2
             {
                 inboxItem.SubItems.Add(new NavigationViewItemModel()
                 {
+                    VIP = new VIP71() { Number = numVip += 1, Temperature = tempVip +=15, VoltageInput = VInputVip +=2, VoltageOut1 = 2, VoltageOut2 = 3},
                     TypeButton = TemplateType.Vip,
                     IconNone = iconNoneSub,
                     IconError = iconError,
@@ -113,7 +131,7 @@ namespace TelerikWpfApp2
                 });
             }
 
-            
+
             return new ObservableCollection<NavigationViewItemModel>
             {
             inboxItem,
@@ -123,7 +141,7 @@ namespace TelerikWpfApp2
         private IEnumerable<VIP71> AllProducts = new List<VIP71>();
 
         IEnumerable<VIP71> currentSelection;
-       public IEnumerable<VIP71> CurrentSelection
+        public IEnumerable<VIP71> CurrentSelection
         {
             get => currentSelection;
             set
@@ -163,7 +181,7 @@ namespace TelerikWpfApp2
         public string MainIco
         {
             get => mainIco;
-            set { Set(ref mainIco, value); }
+            set => Set(ref mainIco, value);
         }
 
         private string timeLeft;
@@ -216,14 +234,14 @@ namespace TelerikWpfApp2
                 }
             }
         }
-        //TODO меняется при нажатии/зоде испытаний
+        //TODO меняется при нажатии/ходе испытаний
         private string place;
         public string Place => place = "Меню/ВИП#";
 
         #endregion
 
         #region Commands
-        
+
         /// <summary>
         /// Команда остановить запустиьт исптания (для тестов)
         /// </summary>
@@ -232,7 +250,7 @@ namespace TelerikWpfApp2
 
 
         /// <summary>
-        /// Команда смены режима ипытаний (для тестов)
+        /// Команда смены режима испытаний (для тестов)
         /// </summary>
         /// <param name="p"></param>
         void OnCloseAppCmdExecuted(object p)
@@ -252,23 +270,22 @@ namespace TelerikWpfApp2
                 MainStatus = StatusTest.None;
             }
         }
-
         /// <summary>
-        /// Доступонсть команды для смкены режима исп (для тестов)
+        /// Доступность команды для смены режима испытаний (для тестов)
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
         bool CanCloseAppCmdExecuted(object p)
         {
-
             //команда доступна для выполнения всегда, поэтому возварщаем труе 
             return true;
         }
 
         /// <summary>
-        /// Команда 
+        /// Команда заглушка для кнопок (привязана к кнопкам ВИП 1...12)
         /// </summary>
-        public ICommand SelectVipCommand;
+        public ICommand SelectVipCommand { get; }
+
         private void OnSelectVipCmdExecuted(object obj)
         {
             var s = ((NavigationViewItemModel)obj).Status;
@@ -276,6 +293,25 @@ namespace TelerikWpfApp2
         }
 
         private bool CanSelectVipCmdExecuted(object arg)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Команда заглушка для кнопок (привязана к кнопкам ВИП 1...12)
+        /// </summary>
+        public ICommand SettingsCommand { get; }
+
+        private void OnSettingCmdExecuted(object obj)
+        {
+            foreach (var sub in Items[0].SubItems)
+            {
+                sub.NumVip += 1;
+            }
+            //MessageBox.Show("Окрыть настрокйки");
+        }
+
+        private bool CanSettingCmdExecuted(object arg)
         {
             return true;
         }

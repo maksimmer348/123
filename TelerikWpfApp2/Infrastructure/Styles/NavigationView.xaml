@@ -10,8 +10,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
-                <TextBlock Text="WIZARD" FontSize="16" Foreground="#f00" FontWeight="Medium"/>
+                <TextBlock Text="content EMPTY" FontSize="16" Foreground="#f00" FontWeight="Medium"/>
             </Grid>
         </ScrollViewer>
     </DataTemplate>
@@ -24,7 +23,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="content EMPTY" FontSize="16" Foreground="Gray" FontWeight="Medium"/>
+                <TextBlock Text="WIZARD" FontSize="16" Foreground="Gray" FontWeight="Medium"/>
             </Grid>
         </ScrollViewer>
     </DataTemplate>
@@ -49,15 +48,20 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
-                <TextBlock Text="{Binding Title}" FontSize="16" Foreground="#F90" FontWeight="Medium"/>
+                <StackPanel>
+                    <TextBlock Text="{Binding Title}" FontSize="16" Foreground="#F90" FontWeight="Medium"/>
+                    <TextBlock Text="{Binding NumVip}" FontSize="16" Foreground="DarkBlue" FontWeight="Medium"/>
+                    <TextBlock Text="{Binding VIP.Temperature}" FontSize="16" Foreground="Fuchsia" FontWeight="Medium"/>
+                    <TextBlock Text="{Binding VIP.VoltageInput}" FontSize="16" Foreground="Azure" FontWeight="Medium"/>
+                </StackPanel>
+              
             </Grid>
         </ScrollViewer>
     </DataTemplate>
 
     <local:NavigationContentTemplateSelector x:Key="NavigationContentTemplateSelector" 
                                              TemplateEmpty="{StaticResource ContentTemplateEmpty}"
-                                             TemplateWizard="{StaticResource ContentTemplateEmpty}"
+                                             TemplateWizard="{StaticResource ContentWizard}"
                                              TemplateAllVips="{StaticResource ContentTemplateAllVips}" 
                                              TemplateVip="{StaticResource ContentTemplateVip}"/>
 
