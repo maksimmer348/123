@@ -56,7 +56,7 @@
             ItemsSource="{Binding Items}"
             ItemContainerStyle="{StaticResource ItemStyle}"
             SubItemsIndentation ="10"
-            SelectedItem  ="{Binding MenuItem,  Mode=TwoWay}"
+            SelectedItem  ="{Binding MenuItem, Mode=TwoWay}"
         >
             <telerik:RadNavigationView.PaneFooter>
                 <telerik:RadNavigationViewItem Content="Настройки" 
@@ -69,16 +69,26 @@
                 </telerik:RadNavigationViewItem>
             </telerik:RadNavigationView.PaneFooter>
             <!--/////////-->
-
+   
             <telerik:RadNavigationView.Content>
-                <telerik:RadTransitionControl Content="{Binding SelectedItem, ElementName=NavigationView}"
-                                              ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
-                                              Duration="0:0:0.4">
-                    <telerik:RadTransitionControl.Transition>
-                        <telerik:FadeTransition />
-                    </telerik:RadTransitionControl.Transition>
-                </telerik:RadTransitionControl>
+                <DockPanel>
+                    <telerik:RadTransitionControl  DockPanel.Dock="Top" Content="{Binding SelectedItem, ElementName=NavigationView}"
+                                                  ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
+                                                  Duration="0:0:0.4" MinHeight="438" VerticalAlignment="Top" UseLayoutRounding="False" >
+                        <telerik:RadTransitionControl.Transition>
+                            <telerik:FadeTransition />
+                        </telerik:RadTransitionControl.Transition>
+                    </telerik:RadTransitionControl>
+                    <StackPanel ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <Button>123</Button>
+                        <Button>123</Button>
+                        <Button>123</Button>
+                    </StackPanel>
+                </DockPanel>
             </telerik:RadNavigationView.Content>
         </telerik:RadNavigationView>
+
+
+        
     </Grid>
 </telerik:RadRibbonWindow>

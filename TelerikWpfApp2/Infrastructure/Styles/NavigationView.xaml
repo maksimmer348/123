@@ -29,33 +29,58 @@
     </DataTemplate>
     <DataTemplate x:Key="ContentTemplateAllVips">
         <ScrollViewer>
-            <Grid Margin="20 20 0 0">
+            <Grid ShowGridLines="True" Margin="00 0 0 0" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
+                    <RowDefinition Height="0,2*"/>
+                    <RowDefinition Height="0,2*"/>
+                    <RowDefinition Height="0,2*"/>
+                    <RowDefinition Height="0,2*"/>
+                    <RowDefinition Height="0,1*"/>
                 </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition/>
+    <ColumnDefinition/>
+    <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{Binding Title}" FontSize="16" Foreground="#0099BC" FontWeight="Medium"/>
-
+                <Button Grid.Row="0" Grid.Column="0" Margin="5" Background="{Binding SubItems[0].IconBrush}" Command="{Binding SelectMenuItemCommand}" CommandParameter="{Binding SubItems[0]}">000</Button>
+                <Button Grid.Row="1" Grid.Column="0" Margin="5" Background="{Binding SubItems[1].IconBrush}"></Button>
+                <Button Grid.Row="2" Grid.Column="0" Margin="5" Background="{Binding SubItems[2].IconBrush}"></Button>
+                <Button Grid.Row="3" Grid.Column="0" Margin="5" Background="{Binding SubItems[3].IconBrush}"></Button>
+                <Button Grid.Row="0" Grid.Column="1" Margin="5" Background="{Binding SubItems[4].IconBrush}"></Button>
+                <Button Grid.Row="1" Grid.Column="1" Margin="5" Background="{Binding SubItems[5].IconBrush}"></Button>
+                <Button Grid.Row="2" Grid.Column="1" Margin="5" Background="{Binding SubItems[6].IconBrush}"></Button>
+                <Button Grid.Row="3" Grid.Column="1" Margin="5" Background="{Binding SubItems[7].IconBrush}"></Button>
+                <Button Grid.Row="0" Grid.Column="2" Margin="5" Background="{Binding SubItems[8].IconBrush}"></Button>
+                <Button Grid.Row="1" Grid.Column="2" Margin="5" Background="{Binding SubItems[9].IconBrush}"></Button>
+                <Button Grid.Row="2" Grid.Column="2" Margin="5" Background="{Binding SubItems[10].IconBrush}"></Button>
+                <Button Grid.Row="3" Grid.Column="2" Margin="5" Background="{Binding SubItems[11].IconBrush}"></Button>
             </Grid>
         </ScrollViewer>
     </DataTemplate>
 
     <DataTemplate x:Key="ContentTemplateVip">
         <ScrollViewer>
-            <Grid Margin="20 20 0 0">
+            <Grid Margin="20 20 0 0" ShowGridLines="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <StackPanel>
+                    
                     <TextBlock Text="{Binding Title}" FontSize="16" Foreground="#F90" FontWeight="Medium"/>
                     <TextBlock Text="{Binding NumVip}" FontSize="16" Foreground="DarkBlue" FontWeight="Medium"/>
                     <TextBlock Text="{Binding VIP.Temperature}" FontSize="16" Foreground="Fuchsia" FontWeight="Medium"/>
-                    <TextBlock Text="{Binding VIP.VoltageInput}" FontSize="16" Foreground="Azure" FontWeight="Medium"/>
+                    <TextBlock Text="{Binding VIP.VoltageInput}" FontSize="16" Foreground="Red" FontWeight="Medium"/>
                 </StackPanel>
-              
+
             </Grid>
+
         </ScrollViewer>
     </DataTemplate>
 

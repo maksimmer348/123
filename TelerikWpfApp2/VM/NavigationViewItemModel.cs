@@ -80,6 +80,8 @@ namespace TelerikWpfApp2
 
         public string Title { get; set; }
         public ObservableCollection<NavigationViewItemModel> SubItems { get; set; }
+        public ICommand SelectMenuItemCommand { get; set; }
         public ICommand NavCommand { get; set; }
+        
     }
 }

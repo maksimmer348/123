@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Telerik.Windows.Controls;
 using TelerikWpfApp2.Model.TestedVIPs;
 
@@ -31,6 +32,7 @@ namespace TelerikWpfApp2
             StopStartTestCommand = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
             SelectVipCommand = new ActionCommand(OnSelectVipCmdExecuted, CanSelectVipCmdExecuted);
             SettingsCommand = new ActionCommand(OnSettingCmdExecuted, CanSettingCmdExecuted);
+            SelectMenuItemCommand = new ActionCommand(OnSelectMenuItemExecuted, CanSettingCmdExecuted);
 
             #endregion
 
@@ -38,6 +40,8 @@ namespace TelerikWpfApp2
 
       
         }
+
+        public ICommand SelectMenuItemCommand { get; set; }
 
 
         #region UI preparation
@@ -112,7 +116,8 @@ namespace TelerikWpfApp2
                 IconOk = iconOk,
                 Title = "ВИПЫ",
                 Status = StatusTest.None,
-                NavCommand = StopStartTestCommand
+                NavCommand = StopStartTestCommand,
+                SelectMenuItemCommand = SelectMenuItemCommand
             };
 
             inboxItem.SubItems = new ObservableCollection<NavigationViewItemModel>();
@@ -127,7 +132,8 @@ namespace TelerikWpfApp2
                     IconOk = iconOk,
                     Title = $"ВИП {i}",
                     Status = StatusTest.None,
-                    NavCommand = SelectVipCommand
+                    NavCommand = SelectVipCommand,
+                    SelectMenuItemCommand = SelectMenuItemCommand
                 });
             }
 
@@ -247,6 +253,10 @@ namespace TelerikWpfApp2
         /// </summary>
         public ICommand StopStartTestCommand { get; }
 
+        public ICommand SelectMenuItemco { get; }
+
+
+
 
 
         /// <summary>
@@ -289,11 +299,15 @@ namespace TelerikWpfApp2
         private void OnSelectVipCmdExecuted(object obj)
         {
             var s = ((NavigationViewItemModel)obj).Status;
-            //MessageBox.Show(s.ToString());
+            MessageBox.Show(s.ToString());
         }
 
         private bool CanSelectVipCmdExecuted(object arg)
         {
+            if (((NavigationViewItemModel)arg)?.Status == StatusTest.None)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -309,6 +323,12 @@ namespace TelerikWpfApp2
                 sub.NumVip += 1;
             }
             //MessageBox.Show("Окрыть настрокйки");
+        }
+
+
+        private void OnSelectMenuItemExecuted(object obj)
+        {
+            MenuItem = (NavigationViewItemModel)obj;
         }
 
         private bool CanSettingCmdExecuted(object arg)
