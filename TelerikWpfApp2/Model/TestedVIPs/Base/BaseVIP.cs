@@ -10,5 +10,10 @@
         public double VoltageOut1 { get; set; }
         public double VoltageOut2 { get; set; }
         public double CurrentInput { get; set; }
+
+        public virtual bool WorkCheck()
+        {
+            return true;
+        }
     }
 }

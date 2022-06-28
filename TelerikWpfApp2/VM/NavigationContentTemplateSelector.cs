@@ -22,6 +22,7 @@ namespace TelerikWpfApp2
                 }
                 if (model.TypeButton == TemplateType.AllVips)
                 {
+                    
                     return this.TemplateAllVips;
                 }
                 if (model.TypeButton == TemplateType.Vip)

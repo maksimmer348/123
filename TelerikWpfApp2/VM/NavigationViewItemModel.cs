@@ -5,14 +5,12 @@ using TelerikWpfApp2.Model.TestedVIPs;
 
 namespace TelerikWpfApp2
 {
-    public class NavigationViewItemModel : BaseVM // можно ли разбить  вью модель на несолько классов вот так
+    public class NavigationViewItemModel : BaseVM
     {
         public BaseVIP VIP { get; set; }
 
-        private int numVip;
-
         /// <summary>
-        /// Иконка окна
+        /// 
         /// </summary>
         public int NumVip
         {
@@ -25,6 +23,7 @@ namespace TelerikWpfApp2
         }
 
         public TemplateType TypeButton;
+
 
         public IconGlyph IconNone;
         public IconGlyph IconError;
@@ -46,6 +45,7 @@ namespace TelerikWpfApp2
                 {
                     Icon = IconNone.Glyph;
                     IconBrush = IconNone.Color;
+                    TypeButton = TemplateType.Wizard;
                 }
 
                 if (status == StatusTest.Error)
@@ -53,6 +53,7 @@ namespace TelerikWpfApp2
 
                     Icon = IconError.Glyph;
                     IconBrush = IconError.Color;
+                    TypeButton = TemplateType.AllVips;
                 }
 
                 if (status == StatusTest.Ok)
@@ -60,6 +61,7 @@ namespace TelerikWpfApp2
 
                     Icon = IconOk.Glyph;
                     IconBrush = IconOk.Color;
+                    TypeButton = TemplateType.AllVips;
                 }
             }
         }
@@ -82,6 +84,5 @@ namespace TelerikWpfApp2
         public ObservableCollection<NavigationViewItemModel> SubItems { get; set; }
         public ICommand SelectMenuItemCommand { get; set; }
         public ICommand NavCommand { get; set; }
-        
     }
 }

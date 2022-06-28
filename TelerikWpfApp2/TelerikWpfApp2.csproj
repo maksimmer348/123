@@ -40,7 +40,11 @@
     <DependentUpon>MainWindow.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
-  <Compile Include="Model\Navigation\NAvi.cs" />
+  <Compile Include="Model\Stand\Stand.cs" />
+  <Compile Include="Model\Stand\StandModules\Base\BaseStandModule.cs" />
+  <Compile Include="Model\Stand\StandModules\Base\NullStandModule.cs" />
+  <Compile Include="Model\Stand\StandModules\RelaySwitch.cs" />
+  <Compile Include="Model\Stand\StandModules\Supply.cs" />
   <Compile Include="Model\TestedVIPs\Base\BaseVIP.cs" />
   <Compile Include="Model\TestedVIPs\VIP71.cs" />
   <Compile Include="Properties\Resources.Designer.cs">
@@ -125,6 +129,10 @@
   
   <ItemGroup>
     <None Include="Test\App.config" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Model\Navigation\" />
   </ItemGroup>
 
 </Project>

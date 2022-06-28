@@ -32,17 +32,14 @@ namespace TelerikWpfApp2
             StopStartTestCommand = new ActionCommand(OnCloseAppCmdExecuted, CanCloseAppCmdExecuted);
             SelectVipCommand = new ActionCommand(OnSelectVipCmdExecuted, CanSelectVipCmdExecuted);
             SettingsCommand = new ActionCommand(OnSettingCmdExecuted, CanSettingCmdExecuted);
-            SelectMenuItemCommand = new ActionCommand(OnSelectMenuItemExecuted, CanSettingCmdExecuted);
-
+            SelectMenuItemCommand = new ActionCommand(OnSelectMenuItemExecuted, CanSelectMenuItemExecuted);
+            TryStartTestCommand = new ActionCommand(OnTryStartTestCmdExecuted, CanTryStartTestCmdExecuted);
             #endregion
 
             Start();
 
-      
+
         }
-
-        public ICommand SelectMenuItemCommand { get; set; }
-
 
         #region UI preparation
 
@@ -82,11 +79,12 @@ namespace TelerikWpfApp2
 
         private ObservableCollection<NavigationViewItemModel> GetItems()
         {
-            int numVip = 0;
-            int tempVip = 10;
-            int VInputVip = 14;
-
-
+           
+            IconGlyph iconWizard = new IconGlyph()
+            {
+                Glyph = "&#xe13b;",
+                Color = Brushes.DarkGray
+            };
             IconGlyph iconNone = new IconGlyph()
             {
                 Glyph = "&#xe13b;",
@@ -116,16 +114,16 @@ namespace TelerikWpfApp2
                 IconOk = iconOk,
                 Title = "ВИПЫ",
                 Status = StatusTest.None,
-                NavCommand = StopStartTestCommand,
+                //NavCommand = StopStartTestCommand,
                 SelectMenuItemCommand = SelectMenuItemCommand
             };
 
+            
             inboxItem.SubItems = new ObservableCollection<NavigationViewItemModel>();
             for (int i = 1; i <= 12; i++)
             {
                 inboxItem.SubItems.Add(new NavigationViewItemModel()
                 {
-                    VIP = new VIP71() { Number = numVip += 1, Temperature = tempVip +=15, VoltageInput = VInputVip +=2, VoltageOut1 = 2, VoltageOut2 = 3},
                     TypeButton = TemplateType.Vip,
                     IconNone = iconNoneSub,
                     IconError = iconError,
@@ -137,10 +135,9 @@ namespace TelerikWpfApp2
                 });
             }
 
-
             return new ObservableCollection<NavigationViewItemModel>
-            {
-            inboxItem,
+            { 
+                inboxItem,
             };
         }
 
@@ -220,7 +217,15 @@ namespace TelerikWpfApp2
                     MainTitle = defaultMainTitle;
                     MainIco = iconsList[0];
                     Items[0].Status = StatusTest.None;
-                    Items[0].SubItems[0].Status = StatusTest.None;
+                    foreach (var sub in Items[0].SubItems)
+                    {
+                        if (sub.NumVip != 0)
+                        {
+                            sub.Status = StatusTest.None;
+                        }
+                    }
+
+                   
                 }
 
                 if (mainStatus == StatusTest.Error)
@@ -228,7 +233,14 @@ namespace TelerikWpfApp2
                     MainTitle = "Ошибка";
                     MainIco = iconsList[1];
                     Items[0].Status = StatusTest.Error;
-                    Items[0].SubItems[0].Status = StatusTest.Error;
+                    foreach (var sub in Items[0].SubItems)
+                    {
+                        if (sub.NumVip != 0)
+                        {
+                            sub.Status = StatusTest.Error;
+                        }
+                        
+                    }
                 }
 
                 if (mainStatus == StatusTest.Ok)
@@ -236,14 +248,20 @@ namespace TelerikWpfApp2
                     MainTitle = $"Идут испытания, до конца: {timeLeft}";
                     MainIco = iconsList[2];
                     Items[0].Status = StatusTest.Ok;
-                    Items[0].SubItems[0].Status = StatusTest.Ok;
+                    foreach (var sub in Items[0].SubItems)
+                    {
+                        if (sub.NumVip != 0)
+                        {
+                            sub.Status = StatusTest.Ok;
+                        }
+                    }
                 }
             }
         }
         //TODO меняется при нажатии/ходе испытаний
+
         private string place;
         public string Place => place = "Меню/ВИП#";
-
         #endregion
 
         #region Commands
@@ -252,13 +270,6 @@ namespace TelerikWpfApp2
         /// Команда остановить запустиьт исптания (для тестов)
         /// </summary>
         public ICommand StopStartTestCommand { get; }
-
-        public ICommand SelectMenuItemco { get; }
-
-
-
-
-
         /// <summary>
         /// Команда смены режима испытаний (для тестов)
         /// </summary>
@@ -299,7 +310,7 @@ namespace TelerikWpfApp2
         private void OnSelectVipCmdExecuted(object obj)
         {
             var s = ((NavigationViewItemModel)obj).Status;
-            MessageBox.Show(s.ToString());
+            //MessageBox.Show(s.ToString());
         }
 
         private bool CanSelectVipCmdExecuted(object arg)
@@ -312,7 +323,7 @@ namespace TelerikWpfApp2
         }
 
         /// <summary>
-        /// Команда заглушка для кнопок (привязана к кнопкам ВИП 1...12)
+        /// Команда заглушка для кнопок (привязана к кнопкам ВИП 1...12, для тестов) 
         /// </summary>
         public ICommand SettingsCommand { get; }
 
@@ -323,18 +334,48 @@ namespace TelerikWpfApp2
                 sub.NumVip += 1;
             }
             //MessageBox.Show("Окрыть настрокйки");
-        }
-
-
-        private void OnSelectMenuItemExecuted(object obj)
-        {
-            MenuItem = (NavigationViewItemModel)obj;
-        }
-
+        } 
         private bool CanSettingCmdExecuted(object arg)
         {
             return true;
         }
+
+        /// <summary>
+        /// Команда для выбора текущего подменю
+        /// </summary>
+        public ICommand SelectMenuItemCommand { get; set; }
+        private void OnSelectMenuItemExecuted(object obj)
+        {
+            MenuItem = (NavigationViewItemModel)obj;
+        }
+        private bool CanSelectMenuItemExecuted(object arg)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Команда для выбора текущего подменю
+        /// </summary>
+        public ICommand TryStartTestCommand { get; set; }
+        private void OnTryStartTestCmdExecuted(object obj)
+        {
+            if (obj is NavigationViewItemModel menuItem)
+            {
+                if (menuItem.Status == StatusTest.None)
+                {
+                    
+                }
+                if (menuItem.Status == StatusTest.Error)
+                {
+
+                }
+            }
+        }
+        private bool CanTryStartTestCmdExecuted(object arg)
+        {
+            return true;
+        }
+
 
 
         #endregion

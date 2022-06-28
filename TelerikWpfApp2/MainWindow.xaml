@@ -4,10 +4,11 @@
                          xmlns:local="clr-namespace:TelerikWpfApp2"
                          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                          Height="582" Width="1000"
+                         MinHeight="582" MinWidth="1000"
                          IsTitleVisible ="True"
                          Title="{Binding MainTitle, UpdateSourceTrigger=PropertyChanged}"
-                         Icon="{Binding MainIco, UpdateSourceTrigger=PropertyChanged}"
-                         ResizeMode="CanMinimize">
+                         Icon="{Binding MainIco, UpdateSourceTrigger=PropertyChanged}">
+    <!--ResizeMode="CanMinimize">-->
     <telerik:RadRibbonWindow.DataContext>
         <local:ViewModel/>
     </telerik:RadRibbonWindow.DataContext>
@@ -26,7 +27,6 @@
             <Style x:Key="ItemBaseStyle" TargetType="telerik:RadNavigationViewItem">
                 <Setter Property="Command" Value="{Binding NavCommand}"/>
                 <Setter Property="CommandParameter" Value="{Binding}"/>
-
                 <Setter Property="Content" Value="{Binding Title}" />
                 <Setter Property="ItemsSource" Value="{Binding SubItems}"/>
                 <Setter Property="Icon" Value="{Binding Icon}"/>
@@ -57,12 +57,13 @@
             ItemContainerStyle="{StaticResource ItemStyle}"
             SubItemsIndentation ="10"
             SelectedItem  ="{Binding MenuItem, Mode=TwoWay}"
+            SelectedIndex="0"
         >
             <telerik:RadNavigationView.PaneFooter>
-                <telerik:RadNavigationViewItem Content="Настройки" 
-                                               Command="{Binding SettingsCommand}"
+                <telerik:RadNavigationViewItem Content="Настройки" Command="{Binding StopStartTestCommand}">
+                    <!--Command="{Binding SettingsCommand}"
                                                CommandParameter="{Binding ElementName=NavigationView}"
-                                               IconTemplate="{x:Null}">
+                                               IconTemplate="{x:Null}">-->
                     <telerik:RadNavigationViewItem.Icon>
                         <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
                     </telerik:RadNavigationViewItem.Icon>
@@ -71,19 +72,20 @@
             <!--/////////-->
    
             <telerik:RadNavigationView.Content>
-                <DockPanel>
-                    <telerik:RadTransitionControl  DockPanel.Dock="Top" Content="{Binding SelectedItem, ElementName=NavigationView}"
-                                                  ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
-                                                  Duration="0:0:0.4" MinHeight="438" VerticalAlignment="Top" UseLayoutRounding="False" >
-                        <telerik:RadTransitionControl.Transition>
-                            <telerik:FadeTransition />
-                        </telerik:RadTransitionControl.Transition>
-                    </telerik:RadTransitionControl>
-                    <StackPanel ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                        <Button>123</Button>
-                        <Button>123</Button>
-                        <Button>123</Button>
-                    </StackPanel>
+                <DockPanel LastChildFill="True">
+
+                    <DockPanel LastChildFill="True"  Margin="0,0,-42, 0">
+
+                        <telerik:RadTransitionControl  DockPanel.Dock="Top" Content="{Binding SelectedItem, ElementName=NavigationView}"
+                                                       ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
+                                                       Duration="0:0:0.4" MinHeight="438" MinWidth="400" VerticalAlignment="Stretch" UseLayoutRounding="False" >
+                            <telerik:RadTransitionControl.Transition>
+                                <telerik:FadeTransition />
+                            </telerik:RadTransitionControl.Transition>
+                        </telerik:RadTransitionControl>
+                       
+                    </DockPanel>
+                   
                 </DockPanel>
             </telerik:RadNavigationView.Content>
         </telerik:RadNavigationView>

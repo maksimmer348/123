@@ -3,6 +3,6 @@
 
     public class VIP71 : BaseVIP
     {
-     
+        
     }
 }
