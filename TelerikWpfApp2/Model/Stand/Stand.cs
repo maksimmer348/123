@@ -1,23 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Documents;
-using TelerikWpfApp2.Model.Stand.StandModules;
-using TelerikWpfApp2.Model.Stand.StandModules.Base;
-using TelerikWpfApp2.Model.TestedVIPs;
 
-namespace TelerikWpfApp2.Model.Stand;
+
+namespace TelerikWpfApp2;
 
 public class Stand
 {
-    private List<BaseStandModule> StandModules = new()
+    public List<BaseStandModule> StandModules { get; set; } = new()
     {
         new RelaySwitch(1),
         new RelaySwitch(12),
         new Supply(1)
     };
 
-
-    
-    private List<BaseVIP> VIPs = new()
+    private List<BaseVIP> VIPs { get; set; } = new()
     {
         new VIP71() { Number = 1, Temperature = 15, VoltageInput  = 20, VoltageOut1 = 290, VoltageOut2 = 8 },
         new VIP71() { Number = 2, Temperature = 25, VoltageInput  = 21, VoltageOut1 = 100, VoltageOut2 = 7 },
@@ -26,7 +22,7 @@ public class Stand
         new VIP71() { Number = 5, Temperature = 55, VoltageInput  = 10, VoltageOut1 = 200, VoltageOut2 = 1 },
     };
 
-    public (bool,BaseStandModule) TestStandModules()
+    public (bool, BaseStandModule) PreliminaryTestStandModules()
     {
         if (StandModules != null)
         {
@@ -42,19 +38,21 @@ public class Stand
         return (false, NullStandModule.getInstance());
     }
 
-    public (bool, BaseVIP) TestVips()
+    public (bool, BaseVIP) PreliminaryTestVips()
     {
         if (VIPs != null)
         {
             foreach (var vip in VIPs)
             {
-                if (vip.())
+                if (vip.WorkCheck())
                 {
-                    return (true, module);
+                    return (true, vip);
                 }
-                return (false, module);
+                return (false, vip);
             }
         }
         return (false, new BaseVIP());
     }
+
+
 }

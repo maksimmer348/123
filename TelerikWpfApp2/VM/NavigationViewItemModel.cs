@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
-using TelerikWpfApp2.Model.TestedVIPs;
+
 
 namespace TelerikWpfApp2
 {
-    public class NavigationViewItemModel : BaseVM
+    public class NavigationViewItemModel : BaseVM 
     {
         public BaseVIP VIP { get; set; }
 

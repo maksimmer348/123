@@ -1,4 +1,4 @@
-﻿namespace TelerikWpfApp2.Model.Stand.StandModules.Base;
+﻿namespace TelerikWpfApp2;
 
 public class BaseStandModule
 {

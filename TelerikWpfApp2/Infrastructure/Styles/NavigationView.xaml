@@ -88,12 +88,11 @@
                 <Button Grid.Row="2" Grid.Column="2" Margin="5" Background="{Binding SubItems[10].IconBrush}"></Button>
                 <Button Grid.Row="3" Grid.Column="2" Margin="5" Background="{Binding SubItems[11].IconBrush}"></Button>
                 <telerik:RadComboBox Grid.Row="0" Grid.Column="0" DockPanel.Dock="Right" ItemsSource="{Binding SubItems}" DisplayMemberPath="NumVip" SelectedValue="{Binding Path=NavigationViewItemModel}" />
-                <StackPanel Grid.Row="4" Grid.ColumnSpan ="3" Grid.Column="0"
+                <StackPanel Grid.Row="5" Grid.ColumnSpan ="3" Grid.Column="0"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden" DockPanel.Dock="Bottom">
-                    <Button>123</Button>
-                    <Button>123</Button>
-                    <Button>12323</Button>
+                        <Button Command="{Binding TryStartTestCommand}" CommandParameter="{Binding }">Далее</Button>
                 </StackPanel>
+                        
             </Grid>
         </ScrollViewer>
     </DataTemplate>

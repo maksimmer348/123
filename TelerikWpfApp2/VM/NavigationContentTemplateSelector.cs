@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TelerikWpfApp2.Model.TestedVIPs;
+
 
 namespace TelerikWpfApp2
 {

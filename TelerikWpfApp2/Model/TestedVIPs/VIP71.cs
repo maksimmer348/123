@@ -1,4 +1,4 @@
-﻿namespace TelerikWpfApp2.Model.TestedVIPs
+﻿namespace TelerikWpfApp2
 {
 
     public class VIP71 : BaseVIP

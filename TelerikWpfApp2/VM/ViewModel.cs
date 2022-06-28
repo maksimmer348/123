@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Telerik.Windows.Controls;
-using TelerikWpfApp2.Model.TestedVIPs;
 
-namespace TelerikWpfApp2
-{
+
+namespace TelerikWpfApp2;
+
 
     public class ViewModel : BaseVM
     {
@@ -79,7 +79,9 @@ namespace TelerikWpfApp2
 
         private ObservableCollection<NavigationViewItemModel> GetItems()
         {
-           
+            int numVip = 0;
+            int tempVip = 10;
+            int VInputVip = 14;
             IconGlyph iconWizard = new IconGlyph()
             {
                 Glyph = "&#xe13b;",
@@ -124,6 +126,7 @@ namespace TelerikWpfApp2
             {
                 inboxItem.SubItems.Add(new NavigationViewItemModel()
                 {
+                    VIP = new VIP71() { Number = numVip += 1, Temperature = tempVip += 15, VoltageInput = VInputVip += 2, VoltageOut1 = 2, VoltageOut2 = 3 },
                     TypeButton = TemplateType.Vip,
                     IconNone = iconNoneSub,
                     IconError = iconError,
@@ -380,4 +383,3 @@ namespace TelerikWpfApp2
 
         #endregion
     }
-}
