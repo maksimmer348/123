@@ -16,14 +16,7 @@
     <Grid>
 
         <Grid.Resources>
-
-            <Style x:Key="StopButton" TargetType="Button">
-                <Setter Property="Content" Value="StopTests" />
-                <!--<Setter Property="CloseCommand" Value="{Binding DataContext.StopStartTest, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />-->
-            </Style>
-
             <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter"/>
-
             <Style x:Key="ItemBaseStyle" TargetType="telerik:RadNavigationViewItem">
                 <Setter Property="Command" Value="{Binding NavCommand}"/>
                 <Setter Property="CommandParameter" Value="{Binding}"/>
@@ -37,7 +30,7 @@
                         <DataTemplate>
                             <telerik:RadGlyph Glyph ="{Binding Converter={StaticResource StringToGlyphConverter}}"
                                               Foreground="{Binding BorderBrush, 
-                                              RelativeSource={RelativeSource AncestorType={x:Type telerik:RadNavigationViewItem }}}"/>
+                                              RelativeSource={RelativeSource AncestorType={x:Type telerik:RadNavigationViewItem}}}"/>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
@@ -51,7 +44,7 @@
         <telerik:RadNavigationView
             x:Name="NavigationView"
             CompactModeThresholdWidth="280" 
-            ExpandedModeThresholdWidth="450"
+            ExpandedModeThresholdWidth="450"   
             PaneHeader="{Binding Place}"
             ItemsSource="{Binding Items}"
             ItemContainerStyle="{StaticResource ItemStyle}"
@@ -74,8 +67,7 @@
             <telerik:RadNavigationView.Content>
                 <DockPanel LastChildFill="True">
 
-                    <DockPanel LastChildFill="True"  Margin="0,0,-42, 0">
-
+                    <DockPanel LastChildFill="True"  Margin="0,0,0, 0">
                         <telerik:RadTransitionControl  DockPanel.Dock="Top" Content="{Binding SelectedItem, ElementName=NavigationView}"
                                                        ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
                                                        Duration="0:0:0.4" MinHeight="438" MinWidth="400" VerticalAlignment="Stretch" UseLayoutRounding="False" >

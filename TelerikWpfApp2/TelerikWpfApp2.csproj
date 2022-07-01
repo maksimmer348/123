@@ -20,6 +20,9 @@
   <Page Include="Infrastructure\Styles\Buttons.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="Infrastructure\Styles\Fonts.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="MainWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
@@ -46,6 +49,7 @@
   <Compile Include="Model\Stand\StandModules\RelaySwitch.cs" />
   <Compile Include="Model\Stand\StandModules\Supply.cs" />
   <Compile Include="Model\TestedVIPs\Base\BaseVIP.cs" />
+  <Compile Include="Model\TestedVIPs\Base\VIPConfig.cs" />
   <Compile Include="Model\TestedVIPs\VIP71.cs" />
   <Compile Include="Model\Testing\TestingTryStart.cs" />
   <Compile Include="Properties\Resources.Designer.cs">

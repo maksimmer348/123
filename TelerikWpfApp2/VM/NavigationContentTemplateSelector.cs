@@ -18,11 +18,12 @@ namespace TelerikWpfApp2
                 NavigationViewItemModel model = (NavigationViewItemModel)item;
                 if (model.TypeButton == TemplateType.Wizard)
                 {
-                    return this.TemplateWizard;
+                    return TemplateWizard;
                 }
                 if (model.TypeButton == TemplateType.AllVips)
                 {
-                    
+                    //Для тестов
+                    //return TemplateWizard;
                     return this.TemplateAllVips;
                 }
                 if (model.TypeButton == TemplateType.Vip)
@@ -30,7 +31,6 @@ namespace TelerikWpfApp2
                     return this.TemplateVip;
                 }
             }
-
             return this.TemplateEmpty;
         }
     }

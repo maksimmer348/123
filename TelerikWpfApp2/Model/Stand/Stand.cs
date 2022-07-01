@@ -13,13 +13,13 @@ public class Stand
         new Supply(1)
     };
 
-    private List<BaseVIP> VIPs { get; set; } = new()
+    public List<BaseVIP> VIPs { get; set; } = new()
     {
-        new VIP71() { Number = 1, Temperature = 15, VoltageInput  = 20, VoltageOut1 = 290, VoltageOut2 = 8 },
-        new VIP71() { Number = 2, Temperature = 25, VoltageInput  = 21, VoltageOut1 = 100, VoltageOut2 = 7 },
-        new VIP71() { Number = 3, Temperature = 35, VoltageInput  = 22, VoltageOut1 = 90, VoltageOut2 = 5 },
-        new VIP71() { Number = 4, Temperature = 45, VoltageInput  = 30, VoltageOut1 = 80, VoltageOut2 = 5 },
-        new VIP71() { Number = 5, Temperature = 55, VoltageInput  = 10, VoltageOut1 = 200, VoltageOut2 = 1 },
+        new VIP71() { Name = "1", Temperature = 15, VoltageInput  = 20, VoltageOut1 = 290, VoltageOut2 = 8 },
+        new VIP71() { Name = "2", Temperature = 25, VoltageInput  = 21, VoltageOut1 = 100, VoltageOut2 = 7 },
+       new VIP71() { Name = "3", Temperature = 35, VoltageInput  = 22, VoltageOut1 = 90, VoltageOut2 = 5 },
+       // new VIP71() { Number = 4, Temperature = 45, VoltageInput  = 30, VoltageOut1 = 80, VoltageOut2 = 5 },
+       // new VIP71() { Number = 5, Temperature = 55, VoltageInput  = 10, VoltageOut1 = 200, VoltageOut2 = 1 },
     };
 
     public (bool, BaseStandModule) PreliminaryTestStandModules()
